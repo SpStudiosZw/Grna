@@ -1,0 +1,261 @@
+
+<html>
+<head>
+  <title>2023 Presidential Grant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: url("https://s3-eu-west-2.amazonaws.com/newzimlive/wp-content/uploads/2021/10/31061636/ED1-e1635661007746.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-content {
+      color: white;
+      text-align: center;
+    }
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .hero-content button {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #00ff00;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .hero-content button:hover {
+      transform: scale(1.1);
+    }
+    .form {
+      width: 80%;
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #cccccc;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline-color: #00ff00;
+    }
+    .form-group input[type="submit"] {
+      background-color: #00ff00;
+      color: white;
+      cursor: pointer;
+    }
+    .form-group input[type="submit"]:hover {
+      transform: scale(1.05);
+    }
+     .share-buttons {
+       display:flex; 
+       justify-content:center; 
+       align-items:center; 
+       gap:.5rem; 
+     }
+     .share-icon {
+       width :2rem; 
+       height :2rem; 
+     }
+     .share-link {
+       display:flex; 
+       align-items:center; 
+       gap:.25rem; 
+       text-decoration:none; 
+       color:#000000; 
+     }
+     .share-link:hover {
+       color:#00ff00; 
+     }
+     .counter {
+       text-align:center; 
+       margin-top:.5rem; 
+       font-size :1.2rem; 
+       font-weight:bold; 
+     }
+     @media screen and (max-width :768px) {
+       .hero-content h1 {
+         font-size :3rem; 
+       }
+       .hero-content p {
+         font-size :1.2rem; 
+       }
+       .form {
+         width :90%; 
+       }
+         p {
+    margin: 20px 0;
+  }
+     {
+        margin: 0;
+        padding: 0;
+      }
+      .content {
+        min-height: 100vh;
+        padding-bottom: 50px; /* height of the footer */
+      }
+      .footer {
+        height: 50px;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+      
+     }
+
+   </style>
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
+import { getDatabase, ref, set, runTransaction, onValue } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";
+
+// Your existing Firebase config object
+const firebaseConfig = {
+  apiKey: "AIzaSyAv1FOwF0U9A0cvkT_N3IkKJnyzW0zi0kc",
+  authDomain: "presidential-grant.firebaseapp.com",
+  projectId: "presidential-grant",
+  storageBucket: "presidential-grant.appspot.com",
+  messagingSenderId: "102178318042",
+  appId: "1:102178318042:web:fff0f56f63661b8e3d67e3",
+  measurementId: "G-G38DSGNPGM"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const database = getDatabase(app);
+
+// Create a reference to the "count" node
+const countRef = ref(database, "count");
+
+// Your existing code that uses Firebase Realtime Database
+
+// Set the value of the "count" node to 300000
+set(countRef, 300000);
+
+var submitButton = document.querySelector("input[type='submit']");
+submitButton.addEventListener("click", function(event) {
+  event.preventDefault();
+
+  // Use a transaction to decrement the value of the "count" node by 1
+  runTransaction(countRef, (currentCount) => currentCount - 1);
+  alert("Your application was submitted successfully!");
+});
+
+var counter = document.querySelector(".counter");
+onValue(countRef, (snapshot) => {
+  var currentCount = snapshot.val();
+  counter.textContent = "Applicants left : " + currentCount;
+});
+</script>
+</head>
+<body>
+<div class="container">
+<div class="hero">
+<div class="hero-content">
+<h1>Apply for the Presidential Grant</h1>
+<p>Fill out this form and get a chance to win $10,000 for your project.</p>
+<button>Apply Now</button>
+</div>
+</div>
+<div class="form">
+<h2>Grant Application Form</h2>
+<p>The 2023 Presidential Grant is a program that aims to support innovative and impactful projects that can benefit the society. 300000 applicants will be awarded this grant, If you have an idea that can make a difference, apply now and get a chance to receive up to $10,000 in funding.</p>
+<form action="#" method="POST">
+<div class="form-group">
+<label for="name">Name</label>
+<input type="text" id="name" name="name" required>
+</div>
+<div class="form-group">
+<label for="email">Email</label>
+<input type="email" id="email" name="email" required>
+</div>
+<div class="form-group">
+  <label for="gender">Gender</label>
+  <select id="gender" name="gender">
+    <option value="">--Please choose an option--</option>
+    <option value="male">Male</option>
+    <option value="female">Female</option>
+    <option value="other">Other</option>
+  </select>
+</div>
+<div class="form-group">
+<label for="summary">Why do you deserve this Grant</label>
+<textarea id="summary" name="summary" rows="5" required></textarea>
+</div>
+
+<div class="form-group">
+<input type="submit" value="Submit Application">
+</div>
+<p>The Grant will be received by<stron></stron> 300 000 applicants and will be available when targeted applications are reached</p>
+<div class = "share-buttons">
+<a href = "https://www.facebook.com/sharer/sharer.php?u=https://example.com" target = "_blank" rel = "noopener noreferrer" class = "share-link">
+<img src = "https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt = "Facebook logo" class = "share-icon">
+</a>
+<a href = "https://twitter.com/intent/tweet?text=I%20just%20applied%20for%20the%202023%20Presidential%20Grant!&url=https://example.com&hashtags=presidentialgrant,2023,future" target = "_blank" rel= "noopener noreferrer" class = "share-link">
+<img src = "https://upload.wikimedia.org/wikipedia/en/9/9f/Twitter_bird_logo_2012.svg" alt = "Twitter logo" class = "share-icon">
+</a>
+<a href = "https://www.linkedin.com/shareArticle?mini=true&url=https://example.com&title=I%20just%20applied%20for%20the%202023%20Presidential%20Grant!&summary=Fill%20out%20this%20form%20and%20get%20a%20chance%20to%20win%20$10,000%20for%20your%20project.&source=LinkedIn" target = "_blank" rel = "noopener noreferrer" class = "share-link">
+<img src = "https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt = "LinkedIn logo" class = "share-icon">
+</a>
+<a href = "https://wa.me/?text=I%20just%20applied%20for%20the%202023%20Presidential%20Grant!%0Ahttps://example.com" target = "_blank" rel = "noopener noreferrer" class = "share-link">
+<img src = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt = "WhatsApp logo" class = "share-icon">
+</a>
+<a href = "mailto:?subject=I just applied for the 2023 Presidential Grant!&body=Fill out this form and get a chance to win $10,000 for your project.%0Ahttps://example.com" target = "_blank" rel = "noopener noreferrer" class = "share-link">
+<img src = "https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png" alt = "Email logo" class = "share-icon">
+</a>
+</div>
+<div>
+<p>SHARE TO SPEED UP THE PROCESS❗❗</p>
+</div>
+<div class="counter">
+Applicants left : 300000
+</div>
+</form>
+</div>
+</div>
+<footer>
+  <iframe src="https://example.com/embedded-ad" width="300" height="250"></iframe>
+</footer
+</body>
+</html>
